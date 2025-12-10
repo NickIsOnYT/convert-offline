@@ -100,8 +100,7 @@ async function doConvert (inputFile, inputFormat, outputFormat) {
 
   await ffmpeg.load();
 
-  await ffmpeg.writeFile(inputFile.name, inputFile.bytes);
-  await ffmpeg.exec(["-i", inputFile.name, "-f", outputFormat.internal, "output"]);
+  await ffmpeg.writeFile(inputFile.name, new Uint8Array(inputFile.bytes));
   await ffmpeg.deleteFile(inputFile.name);
 
   const bytes = new Uint8Array((await ffmpeg.readFile("output"))?.buffer);

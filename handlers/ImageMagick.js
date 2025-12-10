@@ -77,8 +77,7 @@ async function init () {
 
 async function doConvert (inputFile, inputFormat, outputFormat) {
 
-  const command = ["convert", inputFile.name, `${outputFormat.internal}:out`];
-  const image = { name: inputFile.name, content: inputFile.bytes };
+  const image = { name: inputFile.name, content: new Uint8Array(inputFile.bytes) };
   const result = await Magick.call([image], command);
 
   if (result.exitCode !== 0) {

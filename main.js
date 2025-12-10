@@ -150,15 +150,10 @@ Promise.all(initPromises).then(() => {
 
 });
 
-async function attemptConvertPath (inputFile, path) {
+async function attemptConvertPath (file, path) {
 
   popupBox.innerHTML = `<h2>Finding conversion route...</h2>
     <p>Trying ${path.map(c => c.format.format).join(" -> ")}</p>`;
-
-  const file = {
-    bytes: new Uint8Array(inputFile.bytes),
-    name: inputFile.name
-  };
 
   for (let i = 0; i < path.length - 1; i ++) {
     try {
