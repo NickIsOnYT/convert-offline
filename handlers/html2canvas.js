@@ -52,12 +52,15 @@ async function doConvert (inputFile, inputFormat, outputFormat) {
   const canvas = await html2canvas(node);
   node.remove();
 
-  return await new Promise((resolve, reject) => {
+  const bytes = await new Promise((resolve, reject) => {
     canvas.toBlob((blob) => {
       if (!blob) return reject("Canvas output failed");
       blob.arrayBuffer().then(buf => resolve(new Uint8Array(buf)));
     }, outputFormat.mime);
   });
+  const name = inputFile.name.split(".")[0] + "." + outputFormat.extension;
+
+  return { bytes, name };
 
 }
 

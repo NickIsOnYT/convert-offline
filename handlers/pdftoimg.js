@@ -54,7 +54,10 @@ async function doConvert (inputFile, inputFormat, outputFormat) {
   });
 
   const base64 = image.slice(image.indexOf(";base64,") + 8);
-  return base64ToBytes(base64);
+  const bytes = base64ToBytes(base64);
+  const name = inputFile.name.split(".")[0] + "." + outputFormat.extension;
+
+  return { bytes, name };
 
 }
 

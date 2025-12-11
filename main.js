@@ -202,9 +202,8 @@ async function attemptConvertPath (file, path) {
 
   for (let i = 0; i < path.length - 1; i ++) {
     try {
-      file.bytes = await path[i + 1].handler.doConvert(file, path[i].format, path[i + 1].format);
+      file = await path[i + 1].handler.doConvert(file, path[i].format, path[i + 1].format);
       if (!file.bytes.length) throw "Output is empty.";
-      file.name = file.name.split(".")[0] + "." + path[i + 1].format.extension;
     } catch (e) {
       console.log(path.map(c => c.format.format));
       console.error(path[i + 1].handler.name, `${path[i].format.format} -> ${path[i + 1].format.format}`, e);

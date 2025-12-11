@@ -132,7 +132,9 @@ async function doConvert (inputFile, inputFormat, outputFormat, retryWithArgs = 
   await ffmpeg.deleteFile("output");
   await ffmpeg.terminate();
 
-  return bytes;
+  const name = inputFile.name.split(".")[0] + "." + outputFormat.extension;
+
+  return { bytes, name };
 
 }
 

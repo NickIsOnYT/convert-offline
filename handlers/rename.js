@@ -132,7 +132,8 @@ async function init () {
 }
 
 async function doConvert (inputFile, inputFormat, outputFormat) {
-  return inputFile.bytes;
+  inputFile.name = inputFile.name.split(".")[0] + "." + outputFormat.extension;
+  return inputFile;
 }
 
 export default {

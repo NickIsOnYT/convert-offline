@@ -109,7 +109,10 @@ async function doConvert (inputFile, inputFormat, outputFormat, retryWithArgs = 
     throw result.stderr.join("\n");
   }
 
-  return result.outputFiles[0].buffer;
+  const bytes = result.outputFiles[0].buffer;
+  const name = inputFile.name.split(".")[0] + "." + outputFormat.extension;
+
+  return { bytes, name };
 
 }
 
